@@ -56,15 +56,35 @@ describe("mergeCategories()", () => {
     `;
 
     it("should return no <option>s for no categories", () => {
-      
+      let categories = [];
+      let result = mergeCategories(template, categories, 'option');
+      expect(result).to.not.contain('<option>');
+      expect(result).to.not.contain('</option>');
+      expect(result).to.contain('<div>');
+      expect(result).to.contain('</div>');
+      expect(result).to.contain('<select>');
+      expect(result).to.contain('</select>');
     });
 
     it("should return a single <option> for one category", () => {
-      expect.fail('please write this test');
+      let categories = ['puppy'];
+      let result = mergeCategories(template, categories, 'option');
+      expect(result).to.contain('<option>puppy</option>');
+      expect(result).to.contain('<div>');
+      expect(result).to.contain('</div>');
+      expect(result).to.contain('<select>');
+      expect(result).to.contain('</select>');
     });
 
     it("should return an <option> for each category", () => {
-      expect.fail('please write this test');
+      let categories = ['puppy', 'mongoose'];
+      let result = mergeCategories(template, categories, 'option');
+      expect(result).to.contain('<option>puppy</option>');
+      expect(result).to.contain('<option>mongoose</option>')
+      expect(result).to.contain('<div>');
+      expect(result).to.contain('</div>');
+      expect(result).to.contain('<select>');
+      expect(result).to.contain('</select>');
     });
   });
 });
