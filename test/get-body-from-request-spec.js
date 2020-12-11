@@ -23,6 +23,19 @@ describe("The getBodyFromRequest function", () => {
   });
 
   it('returns the data read from the stream', done => {
-    expect.fail('please write this test');
+    const bodyPromise = getBodyFromRequest(fakeReq)
+    const data1 = 'this is DUMB'
+    const data2 = 'I am tired'
+    fakeReq.emit('data',data1)
+    fakeReq.emit('data',data2)
+    fakeReq.emit('end')
+    bodyPromise
+      .then(body => {
+        if (body === data1+ data2){
+          done()
+        }else{
+          done(`failed got ${body}`)
+        }
+      })
   });
 });
